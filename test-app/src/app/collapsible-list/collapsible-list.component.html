@@ -1,0 +1,25 @@
+<div class="dropdown" [class.open]="isOpen">
+  <button class="dropdown-toggle" (click)="toggleDropdown($event)">
+    @if (isOpen) {
+    <span style="color: black">Выберите элементы</span>
+    }
+    @else {
+    <span style="color: black">{{displayText}}</span>
+    }
+  </button>
+  <div *ngIf="isOpen">
+    <div *ngFor="let category of categories">
+      <div class="category">
+        <label (click)="toggleCategory(category)" class="dropdown-toggle">
+          {{ category.name }}
+        </label>
+        <div *ngIf="category.isOpen" >
+          <div *ngFor="let item of category.items" class="dropdown-toggle coloured">
+            <input type="checkbox" [checked]="item.selected" (change)="toggleItemSelection(category, item)" />
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
